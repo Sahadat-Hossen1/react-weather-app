@@ -3,13 +3,16 @@ import searchImg from "./assets/images/search.png";
 import Imgclear from "./assets/images/clear.png";
 import Imgclouds from "./assets/images/clouds.png";
 import Imgdrizzle from "./assets/images/drizzle.png";
-import Imghumidity from "./assets/images/humidity.png";
 import Imgmist from "./assets/images/mist.png";
 import Imgrain from "./assets/images/rain.png";
 import Imgsnow from "./assets/images/snow.png";
 import Imgwind from "./assets/images/wind.png";
+import Imghumidity from "./assets/images/humidity.png";
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
+  const [weatherImg,setWeatherImg]=useState(null)
+  // const weatherIcon=data?.weather[0]?.main.ToLowerCase()
+  // console.log(weatherIcon)
   const handle_submite = async (e) => {
     e.preventDefault();
     const cityName = e.target.cityName.value;
@@ -21,14 +24,29 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((data) => setData(data))
-    //   .catch((err) => console.log(err));
+   
   };
-
+  const [img,setimg]=useState(null)
+useEffect(()=>{
+  if(!data || !data.weather) return
+   const condition=data?.weather[0]?.main.toLowerCase()
+if (condition=='clear') {
+  setimg(Imgclear)
   console.log(data);
-  // console.log(data.main.temp);
+} else if (condition =='clouds' ){
+  setimg(Imgclouds)
+}else if (condition =='drizzle' ){
+  setimg(Imgdrizzle)
+} else if (condition =='rain' ){
+  setimg(Imgrain)
+} else if (condition =='snow' ){
+  setimg(Imgsnow)
+}else{
+  setimg(Imgmist)
+}
+},[data])
+console.log(data);
+
   return (
     <div className="flex justify-center py-12 ">
       {/* <!-- main div --> */}
@@ -42,7 +60,7 @@ function App() {
               spellcheck="true"
               autoComplete={false}
               name="cityName"
-              className="w-4/5 border-none bg-cyan-400 focus:border-none focus:outline-none focus:bg-cyan-400 rounded-2xl text-center"
+              className="w-4/5 border-none bg-cyan-400 focus:border-none focus:outline-none focus:bg-cyan-400 rounded-2xl text-center placeholder-white text-white  "
             />
 
             <button
@@ -59,7 +77,7 @@ function App() {
           <div >
             {/* for temp  */}
             <div className="text-center py-6">
-              <img className="py-2" src="" alt="" />
+              <img className="py-2 mx-auto my-0 scale-75" src={img} alt="" />
               <h1 className="py-2">City Name:{data.name} </h1>
               <h1>Temparacare{data?.main?.temp} °C</h1>
             </div>
@@ -83,7 +101,7 @@ function App() {
             </div>
           </div>
         ) : (
-          "Data is loading ......"
+          <h1>Data is loading........</h1>
         )}
       </div>
     </div>
