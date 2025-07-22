@@ -1,6 +1,15 @@
+import { useEffect, useState } from 'react'
 
 
 function App() {
+const [data,setData]=useState([]);
+console.log(data);
+
+
+useEffect(()=>{
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=manikganj&appid=5f7869afe988211f4cc7c24f9b69eb95&units=metric
+`).then(res=>res.json()).then(data=>setData(data)).catch(err=>console.log(err))
+},[])
   return (
   <div  className="flex justify-center py-12 ">
       {/* <!-- main div --> */}
