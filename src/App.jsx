@@ -74,7 +74,7 @@ console.log(data);
         </form>
         {data ? (
           // for showing data
-          <div >
+          <div className="transition-all delay-75 ">
             {/* for temp  */}
             <div className="text-center py-6">
               <img className="py-2 mx-auto my-0 scale-75" src={img} alt="" />
