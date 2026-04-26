@@ -7,7 +7,8 @@ A simple and modern weather application built using **React.js**.
 This app allows users to search for any city and view real-time weather information.
 
 ---
-
+📸 Screenshot
+![alt text](<src/assets/Screenshot (148).png>)![alt text](<src/assets/Screenshot (149).png>)
 ## 🚀 Features
 
 - 🔍 Search weather by city name  
